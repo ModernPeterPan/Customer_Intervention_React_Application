@@ -8,7 +8,7 @@ import {
   Footer,
   Home,
   Form,
-  // Contact,
+  LoginForm,
   // Blog,
   // Posts,
   // Post,

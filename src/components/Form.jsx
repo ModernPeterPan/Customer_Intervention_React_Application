@@ -1,16 +1,44 @@
 import React from "react";
 import { useState } from 'react';
+import LoginForm from "./LoginForm";
 import PersonAdd from "./PersonAdd";
 
 function Form() {
   // const [author, setAuthor] = useState("");
-  const [customer, setCustomer] = useState("");
-  const [user, setUser] = useState("");
-  const [building, setBuilding] = useState("");
-  const [battery, setBattery] = useState("");
-  const [column, setColumn] = useState("");
-  const [elevator, setElevator] = useState("");
-  const [message, setMessage] = useState("");
+  // const [customer, setCustomer] = useState("");
+  // const [user, setUser] = useState("");
+  // const [building, setBuilding] = useState("");
+  // const [battery, setBattery] = useState("");
+  // const [column, setColumn] = useState("");
+  // const [elevator, setElevator] = useState("");
+  // const [message, setMessage] = useState("");
+
+  //Login info meanwhile
+  const adminUser = {
+    email: "customer1@business.com",
+    password: "password123"
+  }
+
+  const [user, setUser] = useState({ email: "" });
+  const [error, setError] = useState("");
+
+  const Login = details => {
+    console.log(details);
+
+    if (details.email == adminUser.email && details.password == adminUser.password) {
+      console.log("Logged in");
+      setUser({
+        email: details.email
+      });
+    } else {
+      console.log("Details do not match!");
+    }
+  }
+
+  const Logout = () => {
+    setUser({ email: ""});
+  }
+  // End of Log Info
 
   // let handleSubmit = async (e) => {
   //   e.preventDefault();
@@ -50,50 +78,7 @@ function Form() {
       <div class="container">
         <div class="row align-items-center my-5">
           <div class="col-lg-7">
-            {/* <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                value={customer}
-                placeholder="Customer"
-                onChange={(e) => setCustomer(e.target.value)}
-              />
-              <input
-                type="text"
-                value={user}
-                placeholder="User"
-                onChange={(e) => setUser(e.target.value)}
-              />
-              <input
-                type="text"
-                value={building}
-                placeholder="Building"
-                onChange={(e) => setBuilding(e.target.value)}
-              />
-              <input
-                type="text"
-                value={battery}
-                placeholder="Battery"
-                onChange={(e) => setBattery(e.target.value)}
-              />
-              <input
-                type="text"
-                value={column}
-                placeholder="Column"
-                onChange={(e) => setColumn(e.target.value)}
-              />
-              <input
-                type="text"
-                value={elevator}
-                placeholder="Elevator"
-                onChange={(e) => setElevator(e.target.value)}
-              />
-
-              <div className="message">{message ? <p>{message}</p> : null}</div>
-            </form> */}
-            <div>
-              <PersonAdd />
-            </div>
-            <button type='submit'>Create</button>
+            <PersonAdd />
           </div>
           <div class="col-lg-5">
             <h1 class="font-weight-light">New Interventions</h1>
