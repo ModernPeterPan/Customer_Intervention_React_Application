@@ -20,11 +20,7 @@ ReactDOM.render(
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/form" element={<Form />} />
-      {/* <Route path="/contact" element={<Contact />} />
-      <Route path="/blog" element={<Blog />}>
-        <Route path="" element={<Posts />} />
-        <Route path=":postSlug" element={<Post />} />
-      </Route> */}
+      <Route path="/login" element={<LoginForm />} />
     </Routes>
     <Footer />
   </Router>,

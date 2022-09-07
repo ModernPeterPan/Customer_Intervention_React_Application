@@ -4,20 +4,20 @@ import * as ReactBootStrap from "react-bootstrap";
 
 export default class PersonList extends React.Component {
     state = {
-        persons: []
+        customerInts: []
     }
 
     componentDidMount() {
         const config = {
             headers: { Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdXN0b21lcjFAYnVzaW5lc3MuY29tIiwiaXNzIjoiaHR0cHM6Ly9qYXZhLWFwaS5jb2RlYm94eHRlc3QueHl6L2F1dGhlbnRpY2F0ZSJ9.QbJsJ-MZXWieFf_fcAkNWI3S9Skqd-yFVF3S2h-uhfo` }
         };
-        axios.get(`https://java-api.codeboxxtest.xyz/customers/1`,
+        axios.get(`https://java-api.codeboxxtest.xyz/customers/2`,
             config
         ).then(res => {
             console.log(res)
-            const persons = res.data;
-            this.setState({ persons });
-            console.log(persons)
+            const customerInts = res.data;
+            this.setState({ customerInts });
+            console.log(customerInts)
         })
     }
 
@@ -38,7 +38,7 @@ export default class PersonList extends React.Component {
                             </tr>
                         </thread>
                         <tbody>
-                            {this.state.persons.interventions?.map(intervention => {
+                            {this.state.customerInts.interventions?.map(intervention => {
                                 return (
                                     <div>
                                         <tr>
