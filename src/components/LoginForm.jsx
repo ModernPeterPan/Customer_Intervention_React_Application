@@ -2,57 +2,42 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function LoginForm() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const history = useNavigate();
-    // useEffect(() => {
-    //     if (localStorage.getItem('user-info')) {
-    //         history.push("/")
-    //     }
-    // }, [])
+const LoginForm = () => {
+    // console.log(props)
+        const [email, setEmail] = useState("");
+        const [password, setPassword] = useState("");
+        const [token, setToken] = useState();
+        const history = useNavigate();
+        // useEffect(() => {
+        //     if (localStorage.getItem('user-info')) {
+        //         history.push("/")
+        //     }
+        // }, [])
 
-    function onClick(e) {
-        e.preventDefault();
-        login();
-        // history("/")
-    }
+        const onClick = (e) => {
+            e.preventDefault();
+            login();
+            history("/", {state: {token: token}})
+        }
 
-    // function GoHome() {
-    //     let navigate = useNavigate();
-    //     const handleClick = e => {
-    //         e.preventDefault();
-    //         navigate('/');
-    //     }
-    //     return <button onClick={handleClick}>Go to Home</button>
-    // }
+        const login = () => {
+            console.log(email, password);
+            let item = { email, password };
+            var x = "";
+            axios.post(`https://java-api.codeboxxtest.xyz/authenticate?email=${email}&password=${password}`, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
+                .then(result => {
+                    console.log("#########")
+                    x = result.data["access_token"]
+                    console.log("result: " + x)
+                    console.log("token: " + token)
+                    localStorage.setItem("user-info", JSON.stringify(x))
+                    // history("/");
 
-    async function login() {
-        console.log(email, password);
-        let item = { email, password };
-        axios.post(`https://java-api.codeboxxtest.xyz/authenticate?email=${email}&password=${password}`, {headers: { 'Content-Type': 'application/x-www-form-urlencoded' }})
-            .then(result => {
-                console.log("#########")
-                console.log(result.data["access_token"])
-                localStorage.setItem("user-info", JSON.stringify(result))
-                history("/");
-            }).catch((error) => {
-                console.log(error)
-            })
-
-            // let result = axios.post(`https://java-api.codeboxxtest.xyz/authenticate?email=${email}&password=${password}`, {headers: { 'Content-Type': 'application/x-www-form-urlencoded' }})
-            // .then(res => {
-            //     console.log(res)
-            // }).catch((error) => {
-            //     console.log(error)
-            // })
-        // let result = await fetch(`https://java-api.codeboxxtest.xyz/authenticate?email=${email}&password=${password}`, {
-        //     method: 'POST',
-        // headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify(item)
-        // });
-
-    }
+                }).catch((error) => {
+                    console.log(error)
+                })
+                setToken(x)
+        }
 
     return (
         <form>
@@ -72,5 +57,6 @@ function LoginForm() {
         </form>
     )
 }
+
 
 export default LoginForm;

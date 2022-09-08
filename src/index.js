@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
@@ -8,11 +8,8 @@ import {
   Footer,
   Home,
   Form,
-  LoginForm,
-  // Blog,
-  // Posts,
-  // Post,
 } from "./components";
+import LoginForm from './components/LoginForm'
 
 ReactDOM.render(
   <Router>
