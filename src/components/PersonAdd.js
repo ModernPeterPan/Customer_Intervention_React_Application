@@ -40,16 +40,16 @@ export default class PersonAdd extends React.Component {
     return (
       <div>
         <h3>Add an intervention</h3>
+        <h6>*</h6>
         <form>
-          <label>Battery ID</label>
           <input
             type='number'
             name='batId'
             placeholder='Enter the number ID'
             // onChange={handleSubmit}
           /> <br />
+             <br />
 
-          <label>Bld Address</label>
           <input
             type='text'
             name='bldAddress'
@@ -57,46 +57,44 @@ export default class PersonAdd extends React.Component {
             placeholder='Enter the address'
             // onChange={handleSubmit}
           /> <br />
-
-          <label>Column ID</label>
+             <br />
           <input
-            type='number'
-            name='colId'
+            type= 'number'
+            name= 'colId'
             placeholder='Enter the number ID'
             // onChange={handleSubmit}
           /> <br />
-
-          <label>Elevator ID</label>
+            <br />
           <input
             type='number'
             name='elvId'
             placeholder='Enter the number ID'
             // onChange={handleSubmit}
           /> <br />
+          <br />
 
-          <label>Report</label>
           <input
             type='text'
             name='report'
             placeholder='Write a report'
             // onChange={handleSubmit}
           /> <br />
-
-          <label>Result</label>
+          <br />
           <input
             type='text'
             name='result'
             placeholder='Write the result'
             // onChange={handleSubmit}
           /> <br />
+          <br />
 
-          <label>Status</label>
           <input
             type='text'
             name='status'
             placeholder='Write the status'
             // onChange={handleSubmit}
           /> <br />
+          <br />
 
           <button type='submit'>Add</button>
         </form>
@@ -105,13 +103,3 @@ export default class PersonAdd extends React.Component {
   }
 }
 
-
-{/* <div>
-  <form onSubmit={this.handleSubmit}>
-    <label>
-      Person Name:
-      <input type="text" name="name" onChange={this.handleChange} />
-    </label>
-    <button type="submit">Add</button>
-  </form>
-</div> */}

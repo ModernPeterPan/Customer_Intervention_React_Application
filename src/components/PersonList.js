@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import * as ReactBootStrap from "react-bootstrap";
+// import * as ReactBootStrap from "react-bootstrap";
+import Table from 'react-bootstrap/Table';
+import Stack from 'react-bootstrap/Stack';
 
 export default class PersonList extends React.Component {
     state = {
@@ -23,39 +25,45 @@ export default class PersonList extends React.Component {
 
     render() {
         return (
-            <div>
-                <table>
-                    <ReactBootStrap.Table bordered>
-                        <thread>
-                            <tr>
-                                <th>Battery ID</th>
-                                <th>Bld Address</th>
-                                <th>Column ID</th>
-                                <th>Elevator ID</th>
-                                <th>Report</th>
-                                <th>Result</th>
-                                <th>Status</th>
-                            </tr>
-                        </thread>
-                        <tbody>
-                            {this.state.customerInts.interventions?.map(intervention => {
-                                return (
-                                    <div>
-                                        <tr>
-                                            <td>{intervention.battery?.id || "null"}</td>
-                                            <td>{intervention.building?.address || "null"}</td>
-                                            <td>{intervention.column?.id || "null"}</td>
-                                            <td>{intervention.elevator?.serial_number || "null"}</td>
-                                            <td>{intervention.report || "null"}</td>
-                                            <td>{intervention.result || "null"}</td>
-                                            <td>{intervention.status || "null"}</td>
-                                        </tr>
-                                    </div>
-                                )
-                            })}
-                        </tbody>
-                    </ReactBootStrap.Table>
-                </table>
+            <div class="text-center">
+                <Table responsive>
+                    <thead>
+                        <tr>
+                            <th>Battery ID</th>
+                            <th>Building Address</th>
+                            <th>Column ID</th>
+                            <th>Elevator ID</th>
+                            <th>Report</th>
+                            <th>Result</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                </Table>
+                {this.state.customerInts.interventions?.map(intervention => {
+                    return (
+                        <div class="d-flex justify-content-center align-items-center">
+                            <div class="text-center">
+                            <Table responsive>
+                                <tbody>
+                                    <tr>
+                                    <Stack direction="horizontal" gap={5}>
+                                        <td>{intervention.battery?.id || "null"}</td>
+                                        <td>{intervention.building?.address || "null"}</td>
+                                        <td>{intervention.column?.id || "null"}</td>
+                                        <td>{intervention.elevator?.serial_number || "null"}</td>
+                                        <td>{intervention.report || "null"}</td>
+                                        <td>{intervention.result || "null"}</td>
+                                        <td>{intervention.status || "null"}</td>
+                                    </Stack>
+                                    </tr>
+                                </tbody>
+                            
+                            </Table>
+                            </div>
+                        </div>
+                    )
+                })}
             </div>
         )
     }
