@@ -1,105 +1,104 @@
 import React from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
-export default class PersonAdd extends React.Component {
-  state = {
-    name: ''
+const PersonAdd = () => {
+  const [customer] = useState(2);
+  const [bat, setBat] = useState(5);
+  const [bld, setBld] = useState(3);
+  const [col, setCol] = useState(4);
+  const [elev, setElev] = useState(5);
+  const [report, setReport] = useState('allo toi');
+
+  //"http://someURLtoAvoidCors.comhttp://YOUR_ACTUAL_URL.com"
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newIntervention = {
+      "customerID": customer,
+      "batteryID": bat,
+      "columnID": col,
+      "elevatorID": elev,
+      "report": report
+    }
+    console.log(newIntervention)
+    fetch(`https://java-api.codeboxxtest.xyz/interventions/new`, {
+      method: 'POST',
+      // mode: 'no-cors',
+      headers: new Headers ({
+        'accept': '*/*',
+        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdXN0b21lcjFAYnVzaW5lc3MuY29tIiwiaXNzIjoiaHR0cHM6Ly9qYXZhLWFwaS5jb2RlYm94eHRlc3QueHl6L2F1dGhlbnRpY2F0ZSJ9.QbJsJ-MZXWieFf_fcAkNWI3S9Skqd-yFVF3S2h-uhfo',
+        'Content-Type': "application/json",
+        "X-Requested-With": "XMLHttpRequest"
+      }),
+      body: JSON.stringify(newIntervention)
+    }).then((
+      response
+    ) => {
+      console.log(response)
+      console.log('new intervention added')
+    }).catch((error) => {
+      console.log(error)
+    })
   }
 
-  render() {
-    //for the form
-    // const [interventions, setInterventions] = useState(data);
-    // const [addFormData, setAddFormData] = useState({
-    //   batId: '',
-    //   bldAddress: '',
-    //   colId: '',
-    //   elvId: '',
-    //   report: '',
-    //   result: '',
-    //   status: ''
-    // })
+return (
+    <div>
+      <h3>Add an intervention</h3>
+      <label>Bld Id</label>
+      <input
+        type='number'
+        name='bldId'
+        placeholder='Enter the Building ID'
+        value={bld}
+        onChange={(e) => setBld(e.target.value)}
+      /> <br />
 
-    // handleSubmit = event => {
-    //   event.preventDefault();
+      <form onSubmit={handleSubmit}>
+        <label>Battery ID</label>
+        <input
+          type='number'
+          name='batId'
+          placeholder='Enter the number ID'
+          value={bat}
+          onChange={(e) => setBat(e.target.value)}
+        /> <br />
 
-    //   const fieldName = event.target.getAttribute('name');
-    //   const fieldValue = event.target.value;
+        <label>Column ID</label>
+        <input
+          type='number'
+          name='colId'
+          placeholder='Enter the number ID'
+          value={col}
+          onChange={(e) => setCol(e.target.value)}
+        // onChange={handleSubmit}
+        /> <br />
 
-    //   const newFormData = { ...addFormData };
-    //   newFormData[fieldName] = fieldValue;
+        <label>Elevator ID</label>
+        <input
+          type='number'
+          name='elvId'
+          placeholder='Enter the number ID'
+          value={elev}
+          onChange={(e) => setElev(e.target.value)}
+        // onChange={handleSubmit}
+        /> <br />
 
-    //   setAddFormData(newFormData);
+        <label>Report</label>
+        <input
+          type='text'
+          name='report'
+          placeholder='Write a report'
+          value={report}
+          onChange={(e) => setReport(e.target.value)}
+        // onChange={handleSubmit}
+        /> <br />
 
-    //   // axios.post(`https://jsonplaceholder.typicode.com/users`, { user })
-    //   //   .then(res => {
-    //   //     console.log(res);
-    //   //     console.log(res.data);
-    //   //   })
-    // }
-
-    return (
-      <div>
-        <h3>Add an intervention</h3>
-        <h6>*</h6>
-        <form>
-          <input
-            type='number'
-            name='batId'
-            placeholder='Enter the number ID'
-            // onChange={handleSubmit}
-          /> <br />
-             <br />
-
-          <input
-            type='text'
-            name='bldAddress'
-            required='required'
-            placeholder='Enter the address'
-            // onChange={handleSubmit}
-          /> <br />
-             <br />
-          <input
-            type= 'number'
-            name= 'colId'
-            placeholder='Enter the number ID'
-            // onChange={handleSubmit}
-          /> <br />
-            <br />
-          <input
-            type='number'
-            name='elvId'
-            placeholder='Enter the number ID'
-            // onChange={handleSubmit}
-          /> <br />
-          <br />
-
-          <input
-            type='text'
-            name='report'
-            placeholder='Write a report'
-            // onChange={handleSubmit}
-          /> <br />
-          <br />
-          <input
-            type='text'
-            name='result'
-            placeholder='Write the result'
-            // onChange={handleSubmit}
-          /> <br />
-          <br />
-
-          <input
-            type='text'
-            name='status'
-            placeholder='Write the status'
-            // onChange={handleSubmit}
-          /> <br />
-          <br />
-
-          <button type='submit'>Add</button>
-        </form>
-      </div>
-    )
-  }
+        <button type='submit'>Add</button>
+        <p>{report}</p>
+      </form>
+    </div>
+  )
 }
 
+export default PersonAdd

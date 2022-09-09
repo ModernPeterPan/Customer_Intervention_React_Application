@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import {useLocation} from 'react-router-dom';
 import PersonList from "./PersonList";
 
-function Home() {
+const Home = () => {
+  const location = useLocation();
+  console.log(location?.state?.token)
+
   return (
     <div className="home">
       <div class="container">
