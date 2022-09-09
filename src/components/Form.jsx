@@ -3,7 +3,7 @@ import { useState } from 'react';
 import LoginForm from "./LoginForm";
 import PersonAdd from "./PersonAdd";
 
-function Form() {
+const Form = () => {
   // const [author, setAuthor] = useState("");
   // const [customer, setCustomer] = useState("");
   // const [user, setUser] = useState("");
