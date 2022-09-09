@@ -4,51 +4,64 @@ import axios from 'axios';
 
 const PersonAdd = () => {
   const [customer] = useState(2);
-  const [bat, setBat] = useState('');
-  const [bld, setBld] = useState('');
-  const [col, setCol] = useState('');
-  const [elev, setElev] = useState('');
-  const [report, setReport] = useState('');
+  const [bat, setBat] = useState(5);
+  const [bld, setBld] = useState(3);
+  const [col, setCol] = useState(4);
+  const [elev, setElev] = useState(5);
+  const [report, setReport] = useState('allo toi');
+
+  //"http://someURLtoAvoidCors.comhttp://YOUR_ACTUAL_URL.com"
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newIntervention = { customer, bat, bld, col, elev, report };
-
-    fetch(`https://java-api.codeboxxtest.xyz/customers/2`, {
+    const newIntervention = {
+      "customerID": customer,
+      "batteryID": bat,
+      "columnID": col,
+      "elevatorID": elev,
+      "report": report
+    }
+    console.log(newIntervention)
+    fetch(`https://java-api.codeboxxtest.xyz/interventions/new`, {
       method: 'POST',
+      // mode: 'no-cors',
       headers: new Headers ({
-        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdXN0b21lcjFAYnVzaW5lc3MuY29tIiwiaXNzIjoiaHR0cHM6Ly9qYXZhLWFwaS5jb2RlYm94eHRlc3QueHl6L2F1dGhlbnRpY2F0ZSJ9.QbJsJ-MZXWieFf_fcAkNWI3S9Skqd-yFVF3S2h-uhfo`,
-        'Content-Type': "application/json" 
+        'accept': '*/*',
+        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdXN0b21lcjFAYnVzaW5lc3MuY29tIiwiaXNzIjoiaHR0cHM6Ly9qYXZhLWFwaS5jb2RlYm94eHRlc3QueHl6L2F1dGhlbnRpY2F0ZSJ9.QbJsJ-MZXWieFf_fcAkNWI3S9Skqd-yFVF3S2h-uhfo',
+        'Content-Type': "application/json",
+        "X-Requested-With": "XMLHttpRequest"
       }),
       body: JSON.stringify(newIntervention)
-    }).then(() => {
-      console.log('new interventtion added')
+    }).then((
+      response
+    ) => {
+      console.log(response)
+      console.log('new intervention added')
+    }).catch((error) => {
+      console.log(error)
     })
   }
 
   return (
     <div>
       <h3>Add an intervention</h3>
+      <label>Bld Id</label>
+      <input
+        type='number'
+        name='bldId'
+        placeholder='Enter the Building ID'
+        value={bld}
+        onChange={(e) => setBld(e.target.value)}
+      /> <br />
+
       <form onSubmit={handleSubmit}>
         <label>Battery ID</label>
         <input
           type='number'
-          required
           name='batId'
           placeholder='Enter the number ID'
           value={bat}
           onChange={(e) => setBat(e.target.value)}
-        /> <br />
-
-        <label>Bld Id</label>
-        <input
-          type='number'
-          name='bldId'
-          required='required'
-          placeholder='Enter the Building ID'
-          value={bld}
-          onChange={(e) => setBld(e.target.value)}
-        // onChange={handleSubmit}
         /> <br />
 
         <label>Column ID</label>
