@@ -10,7 +10,7 @@ const Home = () => {
     <div className="home">
       <div class="container">
         <div class="row align-items-center my-5">
-          <div class="col-lg-4">
+          <div class="col-lg-5">
             <h1 class="font-weight-light">Interventions List</h1>
             <p>
               The current interventions.

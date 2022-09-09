@@ -42,7 +42,7 @@ const PersonAdd = () => {
     })
   }
 
-  return (
+return (
     <div>
       <h3>Add an intervention</h3>
       <label>Bld Id</label>
