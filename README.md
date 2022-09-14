@@ -1,4 +1,12 @@
 https://intervention-react-app.herokuapp.com/
 
-On the website you can swith from the Home tab to the Form tab.
-Unfortunatly 1/3 of the website works. So the form doesn't activate the POST REST API. But you can see the info inside the intervention array of the first customer in the Home page, like if you connected as her/him.
+On the website you can switch from the Home, Login and/or Form tab.
+
+The Login API is not functionning properly for the moment and then you can just ignore that tab. 
+The Home page has a GET API showing only the "pending" status of the customer 1 interventions. Not the active or inactive.
+The Form page can update any of Customer 1 interventions to active, pending or inactive. 
+
+If you change to status to anything that is not "pending" it will disappear from the Home page. Only if you put it back to "pending" wil it appears on
+the Home page.
+
+An explaination is available on Youtube if needed : https://youtu.be/lsWQAEOJwNE
