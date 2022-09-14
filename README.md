@@ -1,4 +1,5 @@
 https://intervention-react-app.herokuapp.com/
+*The website has security issue with the APIs, the best solution as of now is to download the project and run it on a your localhost*
 
 On the website you can switch from the Home, Login and/or Form tab.
 
