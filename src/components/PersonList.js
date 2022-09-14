@@ -12,11 +12,11 @@ export default class PersonList extends React.Component {
     componentDidMount() {
         const config = {
             headers: {
-                Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdXN0b21lcjFAYnVzaW5lc3MuY29tIiwiaXNzIjoiaHR0cHM6Ly9qYXZhLWFwaS5jb2RlYm94eHRlc3QueHl6L2F1dGhlbnRpY2F0ZSJ9.QbJsJ-MZXWieFf_fcAkNWI3S9Skqd-yFVF3S2h-uhfo`,
+                accept: '*/*',
             },
         };
         axios
-            .get(`https://java-api.codeboxxtest.xyz/customers/2`, config)
+            .get(`http://apicsharpavinash.herokuapp.com/api/Intervention/pending`, config)
             .then((res) => {
                 console.log(res);
                 const customerInts = res.data;
@@ -31,40 +31,45 @@ export default class PersonList extends React.Component {
                 <Table responsive>
                     <thead>
                         <tr>
+                            <th>Intervention ID</th>
                             <th>Battery ID</th>
-                            <th>Building Address</th>
+                            <th>Building ID</th>
                             <th>Column ID</th>
                             <th>Elevator ID</th>
-                            <th>Report</th>
-                            <th>Result</th>
                             <th>Status</th>
+                            {/* <th>Result</th>
+                            <th>Status</th> */}
                         </tr>
                     </thead>
-                    {this.state.customerInts.interventions?.map(
+                    {/* // customer_id */}
+                    {this.state.customerInts?.map(
                         (intervention) => {
-                            return (
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            {intervention.battery?.id || "null"}
-                                        </td>
-                                        <td>
-                                            {intervention.building?.address ||
-                                                "null"}
-                                        </td>
-                                        <td>
-                                            {intervention.column?.id || "null"}
-                                        </td>
-                                        <td>
-                                            {intervention.elevator
-                                                ?.serial_number || "null"}
-                                        </td>
-                                        <td>{intervention.report || "null"}</td>
-                                        <td>{intervention.result || "null"}</td>
-                                        <td>{intervention.status || "null"}</td>
-                                    </tr>
-                                </tbody>
-                            );
+                            if (intervention.customer_id === 1 || intervention.interventionDateStart < 0) {
+                                return (
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                {intervention.id || "null"}
+                                            </td>
+                                            <td>
+                                                {intervention.batterie_id || "null"}
+                                            </td>
+                                            <td>
+                                                {intervention.building_id || "null"}
+                                            </td>
+                                            <td>
+                                                {intervention.column_id || "null"}
+                                            </td>
+                                            <td>
+                                                {intervention.elevator_id || "null"}
+                                            </td>
+                                            <td>{intervention.status || "null"}</td>
+                                            {/* <td>{intervention.result || "null"}</td>
+                                            <td>{intervention.status || "null"}</td> */}
+                                        </tr>
+                                    </tbody>
+                                );
+                            }
                         }
                     )}
                 </Table>

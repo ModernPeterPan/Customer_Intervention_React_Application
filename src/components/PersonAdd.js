@@ -3,33 +3,34 @@ import { useState } from 'react';
 import axios from 'axios';
 
 const PersonAdd = () => {
-  const [customer] = useState(2);
-  const [bat, setBat] = useState(5);
-  const [bld, setBld] = useState(3);
-  const [col, setCol] = useState(4);
-  const [elev, setElev] = useState(5);
-  const [report, setReport] = useState('allo toi');
+  const [customer] = useState(1);
+  const [intervention, setIntervention] = useState();
+  const [bat, setBat] = useState();
+  const [bld, setBld] = useState();
+  const [col, setCol] = useState();
+  const [elev, setElev] = useState();
+  const [status, setStatus] = useState('');
 
   //"http://someURLtoAvoidCors.comhttp://YOUR_ACTUAL_URL.com"
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const newIntervention = {
-      "customerID": customer,
-      "batteryID": bat,
-      "columnID": col,
-      "elevatorID": elev,
-      "report": report
+      "customer_id": customer,
+      "intervention_id": intervention,
+      "batterie_id": bat,
+      "column_id": col,
+      "elevator_id": elev,
+      "status": status
     }
     console.log(newIntervention)
-    fetch(`https://java-api.codeboxxtest.xyz/interventions/new`, {
-      method: 'POST',
+    fetch(`http://apicsharpavinash.herokuapp.com/api/Intervention/${intervention}/${status}/start/nil`, {
+      method: 'PUT',
       // mode: 'no-cors',
-      headers: new Headers ({
+      headers: new Headers({
         'accept': '*/*',
-        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdXN0b21lcjFAYnVzaW5lc3MuY29tIiwiaXNzIjoiaHR0cHM6Ly9qYXZhLWFwaS5jb2RlYm94eHRlc3QueHl6L2F1dGhlbnRpY2F0ZSJ9.QbJsJ-MZXWieFf_fcAkNWI3S9Skqd-yFVF3S2h-uhfo',
-        'Content-Type': "application/json",
-        "X-Requested-With": "XMLHttpRequest"
+        // 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdXN0b21lcjFAYnVzaW5lc3MuY29tIiwiaXNzIjoiaHR0cHM6Ly9qYXZhLWFwaS5jb2RlYm94eHRlc3QueHl6L2F1dGhlbnRpY2F0ZSJ9.QbJsJ-MZXWieFf_fcAkNWI3S9Skqd-yFVF3S2h-uhfo',
+        'Content-Type': "application/json"
       }),
       body: JSON.stringify(newIntervention)
     }).then((
@@ -42,19 +43,28 @@ const PersonAdd = () => {
     })
   }
 
-return (
+  return (
     <div>
-      <h3>Add an intervention</h3>
-      <label>Bld Id</label>
-      <input
-        type='number'
-        name='bldId'
-        placeholder='Enter the Building ID'
-        value={bld}
-        onChange={(e) => setBld(e.target.value)}
-      /> <br />
-
+      <h3>Update an intervention</h3>
       <form onSubmit={handleSubmit}>
+        <label>Intervention Id</label>
+        <input
+          type='number'
+          name='intervention_id'
+          placeholder='Enter the Intervention ID'
+          value={intervention}
+          onChange={(e) => setIntervention(e.target.value)}
+        /> <br />
+
+        {/* <label>Bld Id</label>
+        <input
+          type='number'
+          name='bldId'
+          placeholder='Enter the Building ID'
+          value={bld}
+          onChange={(e) => setBld(e.target.value)}
+        /> <br />
+
         <label>Battery ID</label>
         <input
           type='number'
@@ -82,20 +92,20 @@ return (
           value={elev}
           onChange={(e) => setElev(e.target.value)}
         // onChange={handleSubmit}
-        /> <br />
+        /> <br /> */}
 
-        <label>Report</label>
+        <label>Status</label>
         <input
           type='text'
-          name='report'
-          placeholder='Write a report'
-          value={report}
-          onChange={(e) => setReport(e.target.value)}
+          name='status'
+          placeholder='Please, update the status'
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
         // onChange={handleSubmit}
         /> <br />
 
-        <button type='submit'>Add</button>
-        <p>{report}</p>
+        <button type='submit'>Update!</button>
+        {/* <p>{status}</p> */}
       </form>
     </div>
   )

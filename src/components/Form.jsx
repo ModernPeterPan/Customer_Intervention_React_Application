@@ -81,9 +81,9 @@ const Form = () => {
             <PersonAdd />
           </div>
           <div class="col-lg-5">
-            <h1 class="font-weight-light">New Interventions</h1>
+            <h1 class="font-weight-light">Update Interventions</h1>
             <p>
-              Here, you can intervene.
+              Here, you can safely intervene.
             </p>
           </div>
         </div>
